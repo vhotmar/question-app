@@ -48,7 +48,7 @@ export function weightedRandom<T>(items: T[], weights: number[]) {
   if (items.length === 0)
     throw new Error("At least one item has to be present");
 
-  const sums: number[] = [0];
+  const sums: number[] = [weights[0]];
 
   for (let i = 1; i < weights.length; i++) {
     sums[i] = sums[i - 1] + weights[i];
@@ -59,8 +59,6 @@ export function weightedRandom<T>(items: T[], weights: number[]) {
   for (let i = 0; i < sums.length; i++) {
     if (sums[i] > random) return items[i];
   }
-
-  console.log({ sums, random })
 
   throw new Error("Something bad has happened");
 }
@@ -91,7 +89,7 @@ export const chooseNextQuestion = (
       questionsToBeSkipped.indexOf(information.question.id) === -1
   );
   const toBeChoosenWeights = toBeChoosen.map((information) => {
-    if (information.justFailed) return nonCompleted.length / 4;
+    if (information.justFailed) return nonCompleted.length / 2;
 
     return 1 / information.level;
   });

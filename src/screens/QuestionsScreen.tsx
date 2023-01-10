@@ -43,7 +43,7 @@ export const QuestionsScreen = ({
       </CenterContainer>
       <AnswersContainer>
         {questions.map((question) => (
-          <RowContainer>
+          <RowContainer key={question.question.id}>
             <ItemCheckerContainer>
               <div
                 onClick={() => onToggle(question.question.id)}
@@ -59,7 +59,7 @@ export const QuestionsScreen = ({
             <ItemTextContainer>{question.question.text}</ItemTextContainer>
             <ItemCheckerContainer>
               {question.answers.map((answer) =>
-                answer.status === "correct" ? <GreenChecker /> : <RedChecker />
+                answer.status === "correct" ? <GreenChecker key={answer.id} /> : <RedChecker key={answer.id} />
               )}
             </ItemCheckerContainer>
           </RowContainer>
